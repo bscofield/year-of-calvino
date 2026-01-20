@@ -1,6 +1,7 @@
 /* CSS Custom Properties */
 :root {
   --color-primary: #4A6987;
+  --color-dark-primary: #3b4f61;
   --color-secondary: #8b4513;
   --color-background: #faf8f5;
   --color-text: #333;
@@ -96,7 +97,7 @@ a:focus {
 
 /* Header */
 .site-header {
-  background-color: var(--color-primary);
+  background: linear-gradient(var(--color-primary), var(--color-dark-primary));
   color: white;
   padding: 1rem;
   text-align: left;
@@ -279,7 +280,7 @@ main {
 
 /* Footer */
 .site-footer {
-  background-color: var(--color-primary);
+  background: linear-gradient(var(--color-dark-primary), var(--color-primary));
   color: white;
   text-align: center;
   padding: 1.5rem 1rem;
