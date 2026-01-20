@@ -1,0 +1,465 @@
+/* CSS Custom Properties */
+:root {
+  --color-primary: #4A6987;
+  --color-secondary: #8b4513;
+  --color-background: #faf8f5;
+  --color-text: #333;
+  --color-text-light: #666;
+  --color-timeline: #B3C4D5;
+  --color-timeline-dot: #CCCCCC;
+  --color-timeline-dot-read: #4A6987;
+  --color-link: #8b4513;
+  --color-link-hover: #5d2e0d;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --max-width: 1200px;
+  --timeline-width: 4px;
+  --dot-size: 20px;
+}
+
+/* Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-serif);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-weight: normal;
+  line-height: 1.3;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+/* Skip Link for Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Header */
+.site-header {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 1rem;
+  text-align: left;
+}
+
+.site-header h1 {
+  color: white;
+  margin: 0 0 0.5rem;
+}
+
+.site-header p {
+  margin: 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.site-header a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Main Content */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Timeline Layout */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+/* The vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: var(--timeline-width);
+  background-color: var(--color-timeline);
+}
+
+/* Timeline Item */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Dot on the timeline */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background-color: var(--color-timeline-dot);
+  border: 3px solid var(--color-background);
+  border-radius: 50%;
+  top: 2rem;
+  z-index: 1;
+}
+
+/* Read items have a different dot color */
+.timeline-item.read::before {
+  background-color: var(--color-timeline-dot-read);
+}
+
+/* Left side items */
+.timeline-item:nth-child(odd) {
+  margin-left: 0;
+  text-align: right;
+  padding-right: calc(2rem + var(--dot-size) / 2);
+}
+
+.timeline-item:nth-child(odd)::before {
+  right: calc(-0.8 * var(--dot-size) / 2 - var(--timeline-width) / 2);
+}
+
+.timeline-item:nth-child(odd) .work-card {
+  margin-left: auto;
+}
+
+/* Right side items */
+.timeline-item:nth-child(even) {
+  margin-left: 50%;
+  text-align: left;
+  padding-left: calc(2rem + var(--dot-size) / 2);
+}
+
+.timeline-item:nth-child(even)::before {
+  left: calc(-0.8 * var(--dot-size) / 2 - var(--timeline-width) / 2);
+}
+
+/* Work Card */
+.work-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 400px;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Left-side items: cover on left, text on right */
+.timeline-item:nth-child(odd) .work-card {
+  flex-direction: row;
+}
+
+/* Right-side items: cover on right, text on left */
+.timeline-item:nth-child(even) .work-card {
+  flex-direction: row-reverse;
+}
+
+.work-card:hover,
+.work-card:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.work-card:focus {
+  outline: 3px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+/* Cover Image */
+.work-cover {
+  width: 120px;
+  flex-shrink: 0;
+  height: auto;
+  border-radius: 4px;
+  transition: filter 0.3s ease;
+}
+
+/* Grayscale for unread books */
+.work-card.unread .work-cover {
+  filter: grayscale(100%);
+}
+
+.work-card.unread:hover .work-cover,
+.work-card.unread:focus .work-cover {
+  filter: grayscale(50%);
+}
+
+/* Work Info */
+.work-info-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timeline-item:nth-child(odd) .work-info-card {
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) .work-info-card {
+  text-align: left;
+}
+
+.work-title {
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem;
+  color: var(--color-primary);
+}
+
+.work-year {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--color-primary);
+  color: white;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: 3rem;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Work Detail Page Styles */
+.work-detail {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.work-header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.work-header .work-cover {
+  width: 250px;
+  height: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.work-header .work-cover.unread {
+  filter: grayscale(100%);
+}
+
+.work-info {
+  flex: 1;
+  min-width: 250px;
+}
+
+.work-info h1 {
+  margin-bottom: 0.5rem;
+}
+
+.work-italian-title {
+  font-style: italic;
+  color: var(--color-text-light);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.work-metadata {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.work-metadata li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.work-metadata strong {
+  color: var(--color-primary);
+}
+
+.review-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--color-timeline);
+}
+
+.review-section h2 {
+  margin-bottom: 1rem;
+}
+
+.review-placeholder {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+/* Navigation */
+.breadcrumb {
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.breadcrumb a {
+  color: var(--color-text-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: calc(40px + 1rem);
+    padding-right: 1rem;
+    text-align: left;
+  }
+
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    margin-left: 0;
+    text-align: left;
+    padding-left: calc(40px + 1rem);
+    padding-right: 1rem;
+  }
+
+  .timeline-item:nth-child(odd)::before,
+  .timeline-item:nth-child(even)::before {
+    left: calc(20px - var(--dot-size) / 2);
+    right: auto;
+  }
+
+  .timeline-item:nth-child(odd) .work-card,
+  .timeline-item:nth-child(even) .work-card {
+    flex-direction: row;
+    margin-left: 0;
+  }
+
+  .timeline-item:nth-child(odd) .work-info-card,
+  .timeline-item:nth-child(even) .work-info-card {
+    text-align: left;
+  }
+
+  .work-card {
+    max-width: 100%;
+  }
+
+  .work-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .work-info {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .skip-link {
+    display: none;
+  }
+
+  .work-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .work-card.unread .work-cover {
+    filter: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
