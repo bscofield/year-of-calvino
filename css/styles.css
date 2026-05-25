@@ -241,12 +241,12 @@ main {
 }
 
 /* Grayscale for unread books */
-.work-card.unread .work-cover {
+.unread .work-cover {
   filter: grayscale(100%);
 }
 
-.work-card.unread:hover .work-cover,
-.work-card.unread:focus .work-cover {
+.unread:hover .work-cover,
+.unread:focus .work-cover {
   filter: grayscale(50%);
 }
 
@@ -312,7 +312,7 @@ main {
   object-fit: contain;
 }
 
-.work-header .work-cover.unread {
+.unread .work-header .work-cover {
   filter: grayscale(100%);
 }
 
@@ -357,7 +357,7 @@ main {
   margin-bottom: 1rem;
 }
 
-.review-placeholder {
+.unread .review {
   background-color: #f8f9fa;
   padding: 2rem;
   border-radius: 8px;
